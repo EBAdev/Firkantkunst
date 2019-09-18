@@ -2,21 +2,21 @@
 import peasy.*;
 PeasyCam cam;
 
-//fordi at min computer er en gammel macbook fra 2011 så er der en bug når mna kører P3D som kun lige findes på dens gamle drivere... hmmm bad luck
+//fordi at min computer er en gammel macbook fra 2011 så er der en bug når man kører P3D som kun kan findes på dens gamle drivere... hmmm bad luck
 // jeg har fundet et workaround ved at køre programmet med en tom draw funktion første omgang så vil den gerne derfor bliver der nu lavet en boolean som kun bruges en gang
-boolean init = false;
+boolean Initialize = false;
 
 int cubes = 3; //variabel der styrer hvor mange rækker med cuber der skal være
 
 void setup() {
   size(600, 600, P3D);// da vi skal arbejde i 3D så skal vi tilføje P3D i slutningen af size
   
-  cam = new PeasyCam(this, 400);// sæt et nyt kamera op så vi kan se firkanten
+  cam = new PeasyCam(this, 400);// sæt et nyt kamera op så vi kan manøverer omkring firkanten
 }
 
 
 void draw() {
-  if (init) {// mit lille workaround
+  if (Initialize) {// mit lille workaround
     background(0);
 
     directionalLight(126, 126, 126, 0, -1, 0);
@@ -24,7 +24,10 @@ void draw() {
     directionalLight(126, 126, 126, 0, 0, -1);
     ambientLight(102, 102, 102);
     
-//et fix lille for lykke som jeg har fundet lidt inspiration hos vores allesammens favorit youtuber
+//et for loop som jeg har fundet lidt hjælp til fra internettet :P
+// det itererer igennem alle tre dimensioner XYZ og laver variabler som senere bliver brugt til at gange ind på cubernes XYZ variabler
+//for at forskyde dem i forhold til hindanden
+
     for (int i = 0; i < cubes; i++) {
       for (int j = 0; j < cubes; j++) {
         for (int k = 0; k < cubes; k++) {
@@ -42,7 +45,7 @@ void draw() {
         }
       }
     }
-  } else {//mere af mit lille workaround :)
-    init = true;
+  } else { 
+    Initialize = true; //mere af mit lille workaround :)
   }
 }
